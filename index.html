@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>LG Browser Ver.0.8</title>
+<title>LG Browser Ver.1.2</title>
 <style>
 :root{
   --bg:#050505; --panel:#0b0b0b; --grid:#3b3b3b; --gridDot:#595959;
@@ -19,19 +19,19 @@ body{margin:0;background:radial-gradient(circle at center,#111 0,#030303 70%);co
 .combo{height:44px;border:1.5px solid currentColor;border-radius:3px;display:flex;align-items:center;justify-content:center;font-weight:800;position:relative;background:rgba(0,0,0,.45)}
 .combo span{font-size:24px;margin-right:5px}.combo small{font-size:12px}.gColor{color:var(--g)}.lColor{color:var(--l)}
 .die{position:absolute;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:24px;z-index:5;box-shadow:0 8px 18px #000b,inset 0 0 14px #fff6;border:1px solid #ffffff55;transition:left .25s ease, top .25s ease}.die.g{background:rgba(232,85,54,.75);color:#fff}.die.l{background:rgba(93,75,180,.78);color:#fff}
-.playerBar{width:var(--board);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px}.playerBar.topBar{transform:rotate(180deg)}.playerLabel{font-weight:900;letter-spacing:.04em;font-size:18px;display:flex;align-items:center;gap:10px;min-width:0}.playerInitial{font-size:3em;line-height:.85;font-weight:1000}.topLabel{color:var(--l);text-align:left}.bottomLabel{color:var(--g)}
+.playerBar{width:var(--board);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 8px;border:1px solid transparent;border-radius:14px;min-height:54px}.playerBar.topBar{transform:rotate(180deg)}.playerLabel{font-weight:900;letter-spacing:.04em;font-size:18px;display:flex;align-items:center;gap:10px;min-width:0}.playerInitial{font-size:3em;line-height:.85;font-weight:1000}.topLabel{color:var(--l);text-align:left}.bottomLabel{color:var(--g)}
 .board{width:var(--board);height:var(--board);margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);background:#080808;border:1px solid #555;box-shadow:0 0 0 2px #111,0 10px 40px #000;position:relative}
 .cell{position:relative;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);display:flex;align-items:center;justify-content:center}.cell:nth-child(6n){border-right:0}.cell:nth-child(n+31){border-bottom:0}.cell::after{content:"";position:absolute;right:-4px;bottom:-4px;width:7px;height:7px;border-radius:50%;background:var(--gridDot);opacity:.65;z-index:0}.cell:nth-child(6n)::after,.cell:nth-child(n+31)::after{display:none}
 .piece{width:74%;height:74%;border-radius:21%;box-shadow:0 5px 10px #000b,inset 0 2px 6px #fff6,inset 0 -4px 8px #0003;position:relative;z-index:2}.piece.G{background:linear-gradient(145deg,#ff6544,#d9472c)}.piece.L{background:linear-gradient(145deg,#d1cdeb,#9d98c4)}
-.marker{position:absolute;width:54%;height:54%;border-radius:18%;border:3px solid rgba(255,255,255,.92);background:rgba(255,255,255,.16);box-shadow:inset 0 0 14px rgba(255,255,255,.7),0 0 10px rgba(255,255,255,.75);z-index:4;pointer-events:none}
-.marker::before{content:"";position:absolute;left:50%;top:50%;width:142%;height:142%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(255,255,255,.18);box-shadow:0 0 18px rgba(255,255,255,.6), inset 0 0 10px rgba(255,255,255,.25);z-index:-1}
-.marker::after{content:"";position:absolute;inset:12% 16% auto 16%;height:18%;border-radius:999px;background:rgba(255,255,255,.55);filter:blur(.2px)}
+.marker{position:absolute;width:58%;height:58%;border-radius:18%;border:3px solid rgba(255,255,255,1);background:rgba(255,255,255,.22);box-shadow:inset 0 0 18px rgba(255,255,255,.9),0 0 18px rgba(255,255,255,.95),0 0 34px rgba(255,255,255,.38);z-index:4;pointer-events:none;animation:markerGlow 1.7s ease-in-out infinite}
+.marker::before{content:"";position:absolute;left:50%;top:50%;width:162%;height:162%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(255,255,255,.22);box-shadow:0 0 30px rgba(255,255,255,.82), inset 0 0 14px rgba(255,255,255,.32);z-index:-1}
+.marker::after{content:"";position:absolute;inset:10% 14% auto 14%;height:20%;border-radius:999px;background:rgba(255,255,255,.72);filter:blur(.2px)}@keyframes markerGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
 .cell.chainLine{background:rgba(95,95,95,.42)}.cell.legal{animation:legalPulse 1.8s ease-in-out infinite;background:rgba(255,238,150,.34)}.cell.legal.chainLine{animation:legalPulse 1.8s ease-in-out infinite;background:rgba(255,238,150,.44)}@keyframes legalPulse{0%,100%{background:rgba(255,238,150,.24)}50%{background:rgba(255,238,150,.62)}}
-.flash{animation:flash .45s ease 2}@keyframes flash{50%{filter:brightness(2.8);box-shadow:0 0 24px #fff}}
-.controls{height:50px;display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0}.controls.topControls{transform:none}.endChain{display:none;border:1.5px solid #fff;background:#111;color:#fff;border-radius:12px;padding:9px 18px;font-size:18px}.status{min-width:110px;text-align:right;font-weight:800}.overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.78);border:1px solid #777;border-radius:12px;padding:18px 26px;text-align:center;font-weight:900;font-size:24px;z-index:15;display:none;white-space:pre-line}.overlay.lTurn{transform:translate(-50%,-50%) rotate(180deg)}.restartBtn{margin-top:18px;border:1.5px solid #fff;background:#111;color:#fff;border-radius:12px;padding:10px 20px;font-size:16px;font-weight:800}
+.chainFx{position:fixed;height:4px;background:linear-gradient(90deg,rgba(255,255,255,.15),rgba(255,255,255,.96),rgba(255,255,255,.2));box-shadow:0 0 14px rgba(255,255,255,.88),0 0 30px rgba(255,255,255,.35);border-radius:999px;transform-origin:left center;z-index:14;pointer-events:none;animation:chainDraw .55s ease-out forwards}.chainFx::after{content:"";position:absolute;right:-5px;top:50%;width:10px;height:10px;transform:translateY(-50%);border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 0 16px rgba(255,255,255,.9)}@keyframes chainDraw{0%{opacity:0;clip-path:inset(0 100% 0 0)}12%{opacity:1}75%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 0);opacity:0}}.flash{animation:flash .45s ease 2}@keyframes flash{50%{filter:brightness(2.8);box-shadow:0 0 24px #fff}}
+.controls{height:50px;min-height:50px;display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0}.controls.topControls{transform:none}.endChain,.hintBtn{display:none;border:1.5px solid #fff;background:#111;color:#fff;border-radius:12px;padding:9px 18px;font-size:18px}.hintBtn.active{background:#fff;color:#111}.status{min-width:110px;text-align:right;font-weight:800}.overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.78);border:1px solid #777;border-radius:12px;padding:18px 26px;text-align:center;font-weight:900;font-size:24px;z-index:15;display:none;white-space:pre-line}.overlay.lTurn{transform:translate(-50%,-50%) rotate(180deg)}.overlay.turnG{color:var(--g);border-color:var(--g);box-shadow:0 0 28px rgba(232,85,54,.32)}.overlay.turnL{color:var(--l);border-color:var(--l);box-shadow:0 0 28px rgba(184,180,216,.32)}.app.currentG .bottomBar{background:rgba(232,85,54,.12);border-color:rgba(232,85,54,.7);box-shadow:0 0 22px rgba(232,85,54,.25)}.app.currentL .topBar{background:rgba(184,180,216,.12);border-color:rgba(184,180,216,.7);box-shadow:0 0 22px rgba(184,180,216,.25)}.app.currentG #gHud,.app.currentL #lHud{filter:brightness(1.18)}.restartBtn{margin-top:18px;border:1.5px solid #fff;background:#111;color:#fff;border-radius:12px;padding:10px 20px;font-size:16px;font-weight:800}
 .remaining{position:absolute;font-size:13px;opacity:.9}.remTop{top:8px;right:18px;transform:rotate(180deg);color:var(--l)}.remBottom{bottom:8px;right:18px;color:var(--g)}
 .winwash{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:10;transition:opacity 1s}.winwash.show{opacity:.55}.washG{background:var(--g)}.washL{background:var(--l)}
-@media (max-height:760px){:root{--cell:min(12.3vw,70px)}.combo{height:36px}.die{width:38px;height:38px}.controls{height:44px}.playerLabel{font-size:15px}.app{gap:6px}.title h1{font-size:52px}.status{min-width:95px;font-size:13px}.endChain{padding:8px 14px;font-size:15px}}
+@media (max-height:760px){:root{--cell:min(12.3vw,70px)}.combo{height:36px}.die{width:38px;height:38px}.controls{height:44px}.playerLabel{font-size:15px}.app{gap:6px}.title h1{font-size:52px}.status{min-width:95px;font-size:13px}.endChain,.hintBtn{padding:8px 14px;font-size:15px}}
 </style>
 </head>
 <body>
@@ -39,27 +39,27 @@ body{margin:0;background:radial-gradient(circle at center,#111 0,#030303 70%);co
   <div id="title" class="title"><h1>LG</h1><div class="subtitle">Lavender & Geranium</div><button class="btn" id="recommended">おすすめ配置で開始</button><button class="btn" id="freeSetup">自由初期配置から開始</button></div>
   <div class="playerBar topBar">
     <div class="playerLabel topLabel"><span class="playerInitial">L</span><span>LAVENDER</span></div>
-    <div id="lControls" class="controls topControls"><div id="lStatus" class="status"></div><button id="lEndChain" class="endChain">パス</button></div>
+    <div id="lControls" class="controls topControls"><div id="lStatus" class="status"></div><button id="lHint" class="hintBtn">確認</button><button id="lEndChain" class="endChain">パス</button></div>
   </div>
   <div id="lHud" class="hud top lColor"></div>
   <div id="board" class="board"></div>
   <div id="gHud" class="hud bottom gColor"></div>
   <div class="playerBar bottomBar">
     <div class="playerLabel bottomLabel"><span class="playerInitial">G</span><span>GERANIUM</span></div>
-    <div id="gControls" class="controls"><div id="gStatus" class="status"></div><button id="gEndChain" class="endChain">パス</button></div>
+    <div id="gControls" class="controls"><div id="gStatus" class="status"></div><button id="gHint" class="hintBtn">確認</button><button id="gEndChain" class="endChain">パス</button></div>
   </div>
   <div id="remTop" class="remaining remTop"></div><div id="remBottom" class="remaining remBottom"></div>
   <div id="overlay" class="overlay"></div><div id="wash" class="winwash"></div>
 </div>
 <script>
 const E='.', G='G', L='L';
-let board, current=G, phase='title', marker=null, gPower=1, lPower=2, chainRemaining=0, turnPower=0, setupCounts, consecutivePasses=0;
+let board, current=G, phase='title', marker=null, gPower=1, lPower=2, chainRemaining=0, turnPower=0, setupCounts, consecutivePasses=0, showHints=false;
 const recommended=[['G','L','.','.','G','L'],['.','.','.','.','.','.'],['.','.','L','G','.','.'],['.','.','G','L','.','.'],['.','.','.','.','.','.'],['L','G','.','.','L','G']];
-const boardEl=document.getElementById('board'), overlay=document.getElementById('overlay'), gStatusEl=document.getElementById('gStatus'), lStatusEl=document.getElementById('lStatus'), gEndBtn=document.getElementById('gEndChain'), lEndBtn=document.getElementById('lEndChain');
-function init(){makeHud('gHud',G);makeHud('lHud',L);makeBoard();document.getElementById('recommended').onclick=startRecommended;document.getElementById('freeSetup').onclick=startSetup;gEndBtn.onclick=()=>nextTurn();lEndBtn.onclick=()=>nextTurn();}
+const boardEl=document.getElementById('board'), overlay=document.getElementById('overlay'), gStatusEl=document.getElementById('gStatus'), lStatusEl=document.getElementById('lStatus'), gEndBtn=document.getElementById('gEndChain'), lEndBtn=document.getElementById('lEndChain'), gHintBtn=document.getElementById('gHint'), lHintBtn=document.getElementById('lHint');
+function init(){makeHud('gHud',G);makeHud('lHud',L);makeBoard();document.getElementById('recommended').onclick=startRecommended;document.getElementById('freeSetup').onclick=startSetup;gEndBtn.onclick=()=>nextTurn();lEndBtn.onclick=()=>nextTurn();gHintBtn.onclick=()=>toggleHints();lHintBtn.onclick=()=>toggleHints();}
 function makeHud(id,p){const el=document.getElementById(id);el.innerHTML='';for(let i=1;i<=6;i++){const d=document.createElement('div');d.className='combo '+(p===G?'gColor':'lColor');d.innerHTML=`<span>${i}</span><small>Combo</small>`;el.appendChild(d)}const die=document.createElement('div');die.id=p==='G'?'gDie':'lDie';die.className='die '+(p==='G'?'g':'l');die.textContent=p==='G'?gPower:lPower;el.appendChild(die)}
 function makeBoard(){boardEl.innerHTML='';for(let r=0;r<6;r++)for(let c=0;c<6;c++){const cell=document.createElement('div');cell.className='cell';cell.dataset.r=r;cell.dataset.c=c;cell.onclick=()=>clickCell(r,c);boardEl.appendChild(cell)}}
-function reset(){board=Array.from({length:6},()=>Array(6).fill(E));current=G;marker=null;gPower=1;lPower=2;chainRemaining=0;turnPower=0;consecutivePasses=0;document.getElementById('title').style.display='none';document.getElementById('wash').className='winwash'; overlay.innerHTML='';}
+function reset(){document.querySelector('.app').classList.remove('currentG','currentL');board=Array.from({length:6},()=>Array(6).fill(E));current=G;marker=null;gPower=1;lPower=2;chainRemaining=0;turnPower=0;consecutivePasses=0;showHints=false;document.getElementById('title').style.display='none';document.getElementById('wash').className='winwash'; overlay.innerHTML='';}
 function startRecommended(){reset();board=recommended.map(row=>row.slice());phase='turnStart';turnPower=current===G?gPower:lPower;render();showTurnThenFirst();}
 function startSetup(){reset();phase='setup';setupCounts={[G]:6,[L]:6};render();}
 function render(){[...boardEl.children].forEach(cell=>{const r=+cell.dataset.r,c=+cell.dataset.c;cell.className='cell';cell.innerHTML='';const v=board[r][c];if(v!==E){const p=document.createElement('div');p.className='piece '+v;cell.appendChild(p)}if(marker&&marker.r===r&&marker.c===c){const m=document.createElement('div');m.className='marker';cell.appendChild(m)}});highlight();updateHud();updateStatus();}
@@ -72,8 +72,15 @@ function updateHud(){
 }
 function positionDie(id,power,p,pos){const die=document.getElementById(id); const idx=Math.max(1,Math.min(6,pos))-1; die.style.left=`calc(${idx} * (100% / 6) + (100% / 12) - 22px)`; die.style.top=p===G?'31px':'31px';}
 function updateStatus(){
+  const app=document.querySelector('.app');
+  app.classList.toggle('currentG', current===G && phase!=='title' && phase!=='gameOver');
+  app.classList.toggle('currentL', current===L && phase!=='title' && phase!=='gameOver');
   gEndBtn.style.display=(phase==='chain'&&current===G)?'block':'none';
   lEndBtn.style.display=(phase==='chain'&&current===L)?'block':'none';
+  gHintBtn.style.display=((phase==='first'||phase==='chain')&&current===G)?'block':'none';
+  lHintBtn.style.display=((phase==='first'||phase==='chain')&&current===L)?'block':'none';
+  gHintBtn.classList.toggle('active', showHints && current===G && (phase==='first'||phase==='chain'));
+  lHintBtn.classList.toggle('active', showHints && current===L && (phase==='first'||phase==='chain'));
   gStatusEl.textContent=''; lStatusEl.textContent='';
   if(phase==='setup'){
     gStatusEl.textContent=`${current} 配置`;
@@ -87,6 +94,7 @@ function updateStatus(){
     }
   }
 }
+function toggleHints(){showHints=!showHints;render();}
 function clickCell(r,c){if(phase==='setup'){if(board[r][c]!==E)return;board[r][c]=current;setupCounts[current]--;current=current===G?L:G;if(setupCounts[G]===0&&setupCounts[L]===0){current=G;phase='turnStart';turnPower=current===G?gPower:lPower;render();showTurnThenFirst();}else render();return}if(phase==='first'||phase==='chain'){const legal=getLegalMoves();if(!legal.some(m=>m.r===r&&m.c===c))return;doAction(r,c);}}
 function dirs(){return [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]}
 function inb(r,c){return r>=0&&r<6&&c>=0&&c<6}
@@ -95,27 +103,30 @@ function actionType(r,c){const n=neighborCount(r,c);if(board[r][c]===E&&n===3)re
 function allActionable(){let a=[];for(let r=0;r<6;r++)for(let c=0;c<6;c++){if(actionType(r,c))a.push({r,c})}return a}
 function queenReach(r,c){if(!marker)return false;if(marker.r===r&&marker.c===c)return false;const dr=Math.abs(marker.r-r), dc=Math.abs(marker.c-c);return marker.r===r||marker.c===c||dr===dc}
 function getLegalMoves(){let a=allActionable();if(phase==='chain')a=a.filter(m=>queenReach(m.r,m.c));return a}
-function highlight(){const legal=(phase==='first'||phase==='chain')?getLegalMoves():[];for(const m of legal){boardEl.children[m.r*6+m.c].classList.add('legal')}if(phase==='chain'&&marker){for(let r=0;r<6;r++)for(let c=0;c<6;c++)if(queenReach(r,c))boardEl.children[r*6+c].classList.add('chainLine')}}
-function showTurnThenFirst(){turnPower=current===G?gPower:lPower;render();showOverlay(`${current===G?'GERANIUM':'LAVENDER'} TURN`, current===L);setTimeout(()=>{hideOverlay();startFirst();},2000)}
-function startFirst(){phase='first';render();const legal=getLegalMoves();if(legal.length===0){consecutivePasses++;if(consecutivePasses>=2){gameOverByCount();return}showOverlay(`${current} PASS`, current===L);setTimeout(()=>nextTurn(),2000)}else consecutivePasses=0;}
-function doAction(r,c){const type=actionType(r,c);let changed=[];if(type==='birth'){board[r][c]=current;if(current===G)gPower=Math.min(6,gPower+1);else lPower=Math.min(6,lPower+1);showOverlay(`誕生！\n連鎖力 +1`, current===L)}else if(type==='over'){board[r][c]=E;showOverlay(`過密死！`, current===L)}else if(type==='under'){board[r][c]=E;if(current===G)lPower=Math.max(1,lPower-1);else gPower=Math.max(1,gPower-1);showOverlay(`過疎死！\n相手連鎖力 -1`, current===L)}
+function highlight(){if(!showHints)return;const legal=(phase==='first'||phase==='chain')?getLegalMoves():[];if(phase==='chain'&&marker){for(let r=0;r<6;r++)for(let c=0;c<6;c++)if(queenReach(r,c))boardEl.children[r*6+c].classList.add('chainLine')}for(const m of legal){boardEl.children[m.r*6+m.c].classList.add('legal')}}
+function noMovesThenNext(){showHints=false;render();showOverlay('置ける場所がありません', current===L);setTimeout(()=>nextTurn(),2000)}
+function cellCenter(pos){const el=boardEl.children[pos.r*6+pos.c];const b=el.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}}
+function drawChainEffect(from,to){if(!from||!to)return;document.querySelectorAll('.chainFx').forEach(e=>e.remove());const a=cellCenter(from), b=cellCenter(to);const dx=b.x-a.x, dy=b.y-a.y;const len=Math.hypot(dx,dy);const line=document.createElement('div');line.className='chainFx';line.style.left=a.x+'px';line.style.top=(a.y-2)+'px';line.style.width=len+'px';line.style.transform=`rotate(${Math.atan2(dy,dx)}rad)`;document.body.appendChild(line);setTimeout(()=>line.remove(),700)}
+function showTurnThenFirst(){showHints=false;turnPower=current===G?gPower:lPower;render();showOverlay(`${current===G?'GERANIUM':'LAVENDER'} TURN`, current===L, current);setTimeout(()=>{hideOverlay();startFirst();},2000)}
+function startFirst(){phase='first';render();const legal=getLegalMoves();if(legal.length===0){consecutivePasses++;if(consecutivePasses>=2){gameOverByCount();return}showOverlay('置ける場所がありません', current===L);setTimeout(()=>nextTurn(),2000)}else consecutivePasses=0;}
+function doAction(r,c){showHints=false;const fromMarker=(phase==='chain'&&marker)?{r:marker.r,c:marker.c}:null;const type=actionType(r,c);let changed=[];if(type==='birth'){board[r][c]=current;if(current===G)gPower=Math.min(6,gPower+1);else lPower=Math.min(6,lPower+1);showOverlay(`誕生！\n連鎖力 +1`, current===L)}else if(type==='over'){board[r][c]=E;showOverlay(`過密死！`, current===L)}else if(type==='under'){board[r][c]=E;if(current===G)lPower=Math.max(1,lPower-1);else gPower=Math.max(1,gPower-1);showOverlay(`過疎死！\n相手連鎖力 -1`, current===L)}
 for(const[dR,dC]of dirs()){const rr=r+dR,cc=c+dC;if(inb(rr,cc)&&board[rr][cc]!==E&&board[rr][cc]!==current){board[rr][cc]=current;changed.push({r:rr,c:cc})}}
-marker={r,c};render();changed.forEach(m=>boardEl.children[m.r*6+m.c].classList.add('flash'));setTimeout(()=>{hideOverlay();afterAction();},2000)}
-function afterAction(){const w=checkMonoWin();if(w){gameOver(w);return}if(phase==='first'){phase='chain';chainRemaining=turnPower;render();if(getLegalMoves().length===0)nextTurn();return}if(phase==='chain'){chainRemaining--;if(chainRemaining<=0){nextTurn();return}render();if(getLegalMoves().length===0)nextTurn();}}
-function nextTurn(){current=current===G?L:G;marker=null;phase='turnStart';chainRemaining=0;turnPower=current===G?gPower:lPower;render();showTurnThenFirst();}
+marker={r,c};render();if(fromMarker)drawChainEffect(fromMarker,{r,c});changed.forEach(m=>boardEl.children[m.r*6+m.c].classList.add('flash'));setTimeout(()=>{hideOverlay();afterAction();},2000)}
+function afterAction(){const w=checkMonoWin();if(w){gameOver(w);return}if(phase==='first'){phase='chain';chainRemaining=turnPower;render();if(getLegalMoves().length===0)noMovesThenNext();return}if(phase==='chain'){chainRemaining--;if(chainRemaining<=0){nextTurn();return}render();if(getLegalMoves().length===0)noMovesThenNext();}}
+function nextTurn(){showHints=false;current=current===G?L:G;marker=null;phase='turnStart';chainRemaining=0;turnPower=current===G?gPower:lPower;render();showTurnThenFirst();}
 function checkMonoWin(){let g=0,l=0;for(const row of board)for(const v of row){if(v===G)g++; if(v===L)l++;}if(g>0&&l===0)return G;if(l>0&&g===0)return L;return null}
 function counts(){let g=0,l=0;for(const row of board)for(const v of row){if(v===G)g++; if(v===L)l++;}return {g,l}}
 function gameOverByCount(){const {g,l}=counts();if(g>l)gameOver(G,g,l);else if(l>g)gameOver(L,g,l);else gameOver('D',g,l)}
-function gameOver(w,gc,lc){phase='gameOver';const {g,l}=counts();gc=gc??g;lc=lc??l;let text=w==='D'?`DRAW
+function gameOver(w,gc,lc){phase='gameOver';document.querySelector('.app').classList.remove('currentG','currentL');const {g,l}=counts();gc=gc??g;lc=lc??l;let text=w==='D'?`DRAW
 
 G ${gc}
 L ${lc}`:`${w===G?'GERANIUM':'LAVENDER'} WIN!
 
 G ${gc}
 L ${lc}`;showGameOver(text,w===L);const wash=document.getElementById('wash');wash.className='winwash show '+(w===G?'washG':w===L?'washL':'');}
-function showOverlay(t,rot=false){overlay.textContent=t;overlay.className='overlay'+(rot?' lTurn':'');overlay.style.display='block'}
+function showOverlay(t,rot=false,kind=null){overlay.textContent=t;overlay.className='overlay'+(rot?' lTurn':'')+(kind===G?' turnG':kind===L?' turnL':'');overlay.style.display='block'}
 function showGameOver(t,rot=false){overlay.className='overlay'+(rot?' lTurn':'');overlay.innerHTML=`<div>${t.replace(/\n/g,'<br>')}</div><button class="restartBtn" onclick="backToTitle()">タイトルへ戻る</button>`;overlay.style.display='block'}
-function backToTitle(){phase='title';marker=null;document.getElementById('wash').className='winwash';overlay.style.display='none';document.getElementById('title').style.display='flex';}
+function backToTitle(){phase='title';marker=null;document.querySelector('.app').classList.remove('currentG','currentL');document.getElementById('wash').className='winwash';overlay.style.display='none';document.getElementById('title').style.display='flex';}
 function hideOverlay(){if(phase!=='gameOver')overlay.style.display='none'}
 init();
 </script>
